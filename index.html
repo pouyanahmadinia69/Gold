@@ -1,0 +1,144 @@
+<!doctype html>
+<html lang="fa" dir="rtl">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#090b13">
+  <meta name="description" content="مدیریت هوشمند طلافروشی">
+  <title>زرین | مدیریت طلافروشی</title>
+  <link rel="manifest" href="./manifest.json">
+  <link rel="icon" href="./icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+</head>
+<body>
+  <div class="app-shell">
+    <header class="topbar">
+      <div class="brand">
+        <img src="./goldfox-logo.png" alt="لوگوی روباه طلایی">
+        <div><strong>زرین</strong><small>مدیریت هوشمند طلافروشی</small></div>
+      </div>
+      <button class="icon-btn" id="todayBtn" title="انتخاب تاریخ" aria-label="انتخاب تاریخ">▦</button>
+    </header>
+
+    <main id="mainContent">
+      <section class="page active" id="page-home">
+        <div class="welcome">
+          <div><span class="eyebrow">داشبورد فروشگاه</span><h1>خوش آمدید</h1><p id="todayLabel"></p></div>
+          <div class="fox-glow"><img src="./goldfox-logo.png" alt=""></div>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><span>فروش امروز</span><b id="todaySales">۰</b><small>تومان</small></article>
+          <article class="stat-card"><span>موجودی ثبت‌شده</span><b id="stockWeight">۰</b><small>گرم</small></article>
+          <article class="stat-card"><span>دریافتی امروز</span><b id="todayIncome">۰</b><small>تومان</small></article>
+          <article class="stat-card"><span>تعداد مشتریان</span><b id="customerCount">۰</b><small>نفر</small></article>
+        </div>
+        <div class="section-heading"><h2>دسترسی سریع</h2><span class="gold-line"></span></div>
+        <div class="quick-grid">
+          <button class="quick-card" data-go="sales"><i>＋</i><b>ثبت فروش</b></button>
+          <button class="quick-card" data-go="inventory"><i>◇</i><b>موجودی طلا</b></button>
+          <button class="quick-card" data-go="customers"><i>♙</i><b>مشتریان</b></button>
+          <button class="quick-card" data-go="cash"><i>▤</i><b>صندوق</b></button>
+        </div>
+        <div class="panel"><div class="section-heading"><h2>آخرین فعالیت‌ها</h2></div><div id="recentList" class="empty">هنوز فعالیتی ثبت نشده است.</div></div>
+      </section>
+
+      <section class="page" id="page-sales">
+        <div class="page-title"><span class="eyebrow">عملیات روزانه</span><h1>ثبت فروش</h1><p>اطلاعات فروش را وارد و در پایان ثبت کنید.</p></div>
+        <form id="saleForm" class="panel form-grid">
+          <label>تاریخ فروش<button type="button" class="date-field" data-date="saleDate" id="saleDateBtn">انتخاب تاریخ</button><input type="hidden" id="saleDate"></label>
+          <label>شرح کالا<input id="saleTitle" required placeholder="مثلاً انگشتر ۱۸ عیار"></label>
+          <div class="two-col"><label>وزن (گرم)<input id="saleWeight" inputmode="decimal" placeholder="۰٫۰۰۰"></label><label>مبلغ (تومان)<input id="saleAmount" inputmode="numeric" required placeholder="مبلغ فروش"></label></div>
+          <label>نام مشتری (اختیاری)<input id="saleCustomer" placeholder="نام مشتری"></label>
+          <label>توضیحات<textarea id="saleNote" rows="2" placeholder="توضیحات..."></textarea></label>
+          <button class="primary-btn" type="submit">ثبت فروش</button>
+        </form>
+        <div class="panel"><h2>فروش‌های ثبت‌شده</h2><div id="salesList" class="record-list empty">هنوز فروشی ثبت نشده است.</div></div>
+      </section>
+
+      <section class="page" id="page-inventory">
+        <div class="page-title"><span class="eyebrow">مدیریت کالا</span><h1>موجودی طلا</h1><p>ثبت و کنترل اقلام و وزن موجودی.</p></div>
+        <form id="stockForm" class="panel form-grid">
+          <label>نام کالا<input id="stockTitle" required placeholder="نام یا کد کالا"></label>
+          <div class="two-col"><label>وزن (گرم)<input id="stockWeightInput" inputmode="decimal" required placeholder="۰٫۰۰۰"></label><label>تعداد<input id="stockQty" inputmode="numeric" value="1"></label></div>
+          <label>عیار<select id="stockKarat"><option>۱۸</option><option>۲۴</option><option>۲۱</option><option>۱۴</option></select></label>
+          <button class="primary-btn" type="submit">ثبت موجودی</button>
+        </form>
+        <div class="panel"><h2>فهرست موجودی</h2><div id="stockList" class="record-list empty">موجودی ثبت نشده است.</div></div>
+      </section>
+
+      <section class="page" id="page-customers">
+        <div class="page-title"><span class="eyebrow">ارتباط با مشتری</span><h1>مشتریان</h1></div>
+        <form id="customerForm" class="panel form-grid">
+          <label>نام مشتری<input id="customerName" required placeholder="نام و نام خانوادگی"></label>
+          <label>شماره تماس<input id="customerPhone" inputmode="tel" placeholder="شماره موبایل"></label>
+          <label>یادداشت<textarea id="customerNote" rows="2" placeholder="توضیحات یا یادداشت"></textarea></label>
+          <button class="primary-btn" type="submit">ثبت مشتری</button>
+        </form>
+        <div class="panel"><h2>فهرست مشتریان</h2><div id="customerList" class="record-list empty">مشتری ثبت نشده است.</div></div>
+      </section>
+
+      <section class="page" id="page-cash">
+        <div class="page-title"><span class="eyebrow">ورودی و خروجی</span><h1>صندوق</h1></div>
+        <form id="cashForm" class="panel form-grid">
+          <label>نوع تراکنش<select id="cashType"><option value="in">دریافت</option><option value="out">پرداخت</option></select></label>
+          <label>مبلغ (تومان)<input id="cashAmount" inputmode="numeric" required placeholder="مبلغ"></label>
+          <label>شرح تراکنش<input id="cashTitle" required placeholder="شرح دریافت یا پرداخت"></label>
+          <label>تاریخ<button type="button" class="date-field" data-date="cashDate" id="cashDateBtn">انتخاب تاریخ</button><input type="hidden" id="cashDate"></label>
+          <button class="primary-btn" type="submit">ثبت تراکنش</button>
+        </form>
+        <div class="panel"><h2>تراکنش‌ها</h2><div id="cashList" class="record-list empty">تراکنشی ثبت نشده است.</div></div>
+      </section>
+
+      <section class="page" id="page-reports">
+        <div class="page-title"><span class="eyebrow">تحلیل عملکرد</span><h1>گزارشات</h1><p>خلاصه اطلاعات ثبت‌شده در برنامه.</p></div>
+        <div class="panel report-filter">
+          <label>از تاریخ<button type="button" class="date-field" data-date="reportFrom" id="reportFromBtn">انتخاب تاریخ</button><input type="hidden" id="reportFrom"></label>
+          <label>تا تاریخ<button type="button" class="date-field" data-date="reportTo" id="reportToBtn">انتخاب تاریخ</button><input type="hidden" id="reportTo"></label>
+          <button class="primary-btn" id="runReport" type="button">نمایش گزارش</button>
+        </div>
+        <div class="stats-grid">
+          <article class="stat-card"><span>جمع فروش</span><b id="reportSales">۰</b><small>تومان</small></article>
+          <article class="stat-card"><span>دریافت صندوق</span><b id="reportIn">۰</b><small>تومان</small></article>
+          <article class="stat-card"><span>پرداخت صندوق</span><b id="reportOut">۰</b><small>تومان</small></article>
+          <article class="stat-card"><span>وزن فروش</span><b id="reportWeight">۰</b><small>گرم</small></article>
+        </div>
+        <div class="panel"><h2>خروجی گزارش</h2><button class="secondary-btn" id="exportReport" type="button">دریافت فایل CSV گزارش</button></div>
+      </section>
+
+      <section class="page" id="page-settings">
+        <div class="page-title"><span class="eyebrow">مدیریت برنامه</span><h1>تنظیمات و پشتیبان‌گیری</h1></div>
+        <div class="panel backup-panel">
+          <div class="backup-icon">⇧</div><h2>پشتیبان‌گیری اطلاعات</h2><p>یک فایل پشتیبان ایجاد می‌شود تا بتوانید آن را در محل دلخواه ذخیره کنید.</p>
+          <button class="primary-btn" id="backupBtn" type="button">ساخت فایل پشتیبان</button>
+        </div>
+        <div class="panel backup-panel">
+          <div class="backup-icon">⇩</div><h2>بازیابی اطلاعات</h2><p>فایل پشتیبان قبلی را انتخاب کنید. محتوای فایل نمایش داده نمی‌شود.</p>
+          <input type="file" id="restoreFile" accept=".json,application/json" hidden>
+          <button class="secondary-btn" id="restoreBtn" type="button">انتخاب فایل و بازیابی</button>
+        </div>
+        <div class="panel danger-zone"><h2>مدیریت اطلاعات</h2><p>حذف همه اطلاعات قابل بازگشت نیست.</p><button class="danger-btn" id="clearBtn" type="button">حذف تمام اطلاعات برنامه</button></div>
+        <p class="version">زرین · نسخه آزمایشی ۰.۱</p>
+      </section>
+    </main>
+
+    <nav class="bottom-nav" aria-label="منوی اصلی">
+      <button class="nav-item active" data-page="home"><span>⌂</span><small>خانه</small></button>
+      <button class="nav-item" data-page="sales"><span>＋</span><small>فروش</small></button>
+      <button class="nav-item" data-page="inventory"><span>◇</span><small>موجودی</small></button>
+      <button class="nav-item" data-page="reports"><span>▥</span><small>گزارشات</small></button>
+      <button class="nav-item" data-page="settings"><span>⚙</span><small>بیشتر</small></button>
+    </nav>
+  </div>
+
+  <div class="modal-backdrop" id="calendarModal" hidden>
+    <div class="calendar-modal" role="dialog" aria-modal="true" aria-label="انتخاب تاریخ شمسی">
+      <div class="calendar-head"><button id="prevMonth" type="button">‹</button><strong id="calendarTitle"></strong><button id="nextMonth" type="button">›</button></div>
+      <div class="weekdays"><span>ش</span><span>ی</span><span>د</span><span>س</span><span>چ</span><span>پ</span><span>ج</span></div>
+      <div class="calendar-days" id="calendarDays"></div>
+      <div class="calendar-actions"><button id="calendarCancel" class="secondary-btn" type="button">انصراف</button><button id="calendarToday" class="primary-btn" type="button">امروز</button></div>
+    </div>
+  </div>
+  <div class="toast" id="toast" role="status"></div>
+  <script src="./app.js"></script>
+</body>
+</html>
